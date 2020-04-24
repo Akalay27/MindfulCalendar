@@ -4,6 +4,29 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Row, Col } from 'react-bootstrap';
 import moment from 'moment';
+import Activities from './data/activities.json';
+import { Activity } from './activity';
+function DayList (props) {
+    const events = Activities.map((event) => {
+        
+        if (event.date === props.date.format("MM-DD-YYYY")) {
+            
+            return (
+                <Activity
+                    name={event.name}
+                    type={event.type}
+                    duration={event.duration}
+                />
+            );
+            
+        }
+    });
+    return (
+        events
+    )
+}
+
+
 
 class Calendar extends React.Component {
     
@@ -14,7 +37,14 @@ class Calendar extends React.Component {
             endOfWeek: moment().endOf('week'),
         }
     }
+    renderDayList(date) {
+        return (
+            <DayList
+                date={date}
+            />
 
+        )
+    }
     render() {
         
         var days = [];
@@ -25,18 +55,22 @@ class Calendar extends React.Component {
             day = day.clone().add(1,'d');
         }
         
+        
         const columns = days.map((date) =>
             <Col>
-                <div>
+                <div className="date">
                     {date.format('dddd, M/D')}
+                </div>
+                <div className="activityList">
+                    {this.renderDayList(date)}
                 </div>
             </Col>
         );
         
         return (
             <div className="calendar">
-                <Container>
-                    <Row>
+                <Container fluid>
+                    <Row noGutters={true}>
                         {columns}
                     </Row>
                 </Container>
@@ -48,7 +82,10 @@ class Calendar extends React.Component {
 // ========================================
 
 ReactDOM.render(
-<Calendar />,
+    <body>
+        <Calendar />
+    </body>
+,
 document.getElementById('root')
 );
 

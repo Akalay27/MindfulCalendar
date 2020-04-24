@@ -1,0 +1,14 @@
+[
+    {
+        "name": "tv",
+        "type": "leisure",
+        "duration": 60,
+        "date": "04-23-2020"
+    },
+    {
+        "name": "math",
+        "type": "work",
+        "duration": 30,
+        "date": "04-24-2020"
+    }
+]
