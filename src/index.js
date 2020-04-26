@@ -6,27 +6,27 @@ import {Container, Row, Col } from 'react-bootstrap';
 import moment from 'moment';
 import Activities from './data/activities.json';
 import { Activity } from './activity';
+
 function DayList (props) {
-    const events = Activities.map((event) => {
-        
-        if (event.date === props.date.format("MM-DD-YYYY")) {
-            
+
+    const todaysActivities = Activities.filter((x) => {
+        return moment(x.startTime).date() === props.date.date;
+    });
+
+    const events = todaysActivities.map((event) => {          
             return (
                 <Activity
                     name={event.name}
                     type={event.type}
-                    duration={event.duration}
                 />
             );
             
         }
-    });
+    );
     return (
         events
     )
 }
-
-
 
 class Calendar extends React.Component {
     
@@ -60,6 +60,8 @@ class Calendar extends React.Component {
             <Col>
                 <div className="date">
                     {date.format('dddd, M/D')}
+                    
+                    
                 </div>
                 <div className="activityList">
                     {this.renderDayList(date)}
@@ -79,8 +81,9 @@ class Calendar extends React.Component {
     }
 }
 
-// ========================================
 
+
+// ========================================
 ReactDOM.render(
     <body>
         <Calendar />

@@ -2,13 +2,13 @@
     {
         "name": "tv",
         "type": "leisure",
-        "duration": 60,
-        "date": "04-23-2020"
+        "startTime": "2020-04-19T13:00:00.000Z",
+        "endTime": "2020-04-19T15:00:00.000Z"
     },
     {
         "name": "math",
         "type": "work",
-        "duration": 30,
-        "date": "04-24-2020"
+        "startTime": "2020-04-23T08:00:00.000Z",
+        "endTime": "2020-04-23T09:00:00.000Z"
     }
 ]
