@@ -9,7 +9,7 @@ import { Activity } from './activity';
 import { ActivityManager } from './activityManager';
 
 const activityManager = new ActivityManager();
-const scheduleGenerator = new scheduleGenerator(activityManager);
+//const scheduleGenerator = new scheduleGenerator(activityManager);
 
 class Calendar extends React.Component {
 
