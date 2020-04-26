@@ -2,47 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container, Row, Col } from 'react-bootstrap';
+import {Container, Row, Col, Button } from 'react-bootstrap';
 import moment from 'moment';
 import Activities from './data/activities.json';
 import { Activity } from './activity';
+import { ActivityManager } from './activityManager';
 
-function DayList (props) {
-
-    const todaysActivities = Activities.filter((x) => {
-        return moment(x.startTime).date() === props.date.date;
-    });
-
-    const events = todaysActivities.map((event) => {          
-            return (
-                <Activity
-                    name={event.name}
-                    type={event.type}
-                />
-            );
-            
-        }
-    );
-    return (
-        events
-    )
-}
+const activityManager = new ActivityManager();
+const scheduleGenerator = new scheduleGenerator(activityManager);
 
 class Calendar extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
             startOfWeek: moment().startOf('week'),
             endOfWeek: moment().endOf('week'),
         }
+       
     }
     renderDayList(date) {
         return (
-            <DayList
-                date={date}
-            />
-
+            activityManager.getActivitiesOnDate(date.date())
         )
     }
     render() {
